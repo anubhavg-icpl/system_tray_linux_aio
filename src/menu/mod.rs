@@ -102,6 +102,25 @@ impl TrayMenu {
             _ => Ok(None),
         }
     }
+    
+    pub fn show_menu(&mut self, component: &SystemTrayIconComponent) -> Option<i32> {
+        // Show the popup menu at the tray icon position
+        let bounds = component.get_bounds();
+        let result = self.menu.show_menu_async(
+            bounds.get_x(),
+            bounds.get_y(),
+            0, // minimum width
+            0, // maximum number of columns
+            None, // no target component
+            None  // no callback
+        );
+        
+        if result > 0 {
+            Some(result)
+        } else {
+            None
+        }
+    }
 }
 
 #[derive(Debug, Clone)]

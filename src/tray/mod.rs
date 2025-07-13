@@ -1,11 +1,18 @@
-use aloe_system_tray::SystemTrayIconComponent;
-use aloe_image::Image;
-use aloe_graphics::Colour;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use crate::config::AppConfig;
 use crate::error::{Result, TrayError};
 use crate::menu::TrayMenu;
+
+#[cfg(target_os = "linux")]
+mod linux_impl;
+
+// Placeholder imports for aloe crates
+// These will be used when the build issues are resolved
+// use aloe_system_tray::SystemTrayIconComponent;
+// use aloe_graphics::{Image, Colour};
+// use aloe_menus::{PopupMenu};
+// use aloe_events::{MouseEvent};
 
 pub struct TrayIcon {
     component: SystemTrayIconComponent,
@@ -18,7 +25,7 @@ impl TrayIcon {
         let config = Arc::new(RwLock::new(config));
         let menu = TrayMenu::new(config.clone()).await?;
         
-        let mut component = SystemTrayIconComponent::new();
+        let component = SystemTrayIconComponent::new();
         
         Ok(Self {
             component,
@@ -30,19 +37,12 @@ impl TrayIcon {
     pub async fn initialize(&mut self) -> Result<()> {
         let config = self.config.read().await;
         
-        // Load icon images
-        let colour_image = self.load_icon(&config.icon_path)?;
-        let template_image = if let Some(dark_path) = &config.dark_icon_path {
-            Some(self.load_icon(dark_path)?)
-        } else {
-            None
-        };
+        // Create images for the tray icon
+        let colour_image = self.create_default_icon();
+        let template_image = colour_image.clone();
         
         // Set up the icon
-        self.component.set_icon_image(
-            &colour_image,
-            template_image.as_ref().unwrap_or(&colour_image)
-        );
+        self.component.set_icon_image(&colour_image, &template_image);
         
         // Set tooltip
         self.component.set_icon_tooltip(&config.tooltip);
@@ -54,17 +54,16 @@ impl TrayIcon {
         Ok(())
     }
     
-    fn load_icon(&self, path: &std::path::Path) -> Result<Image> {
-        if !path.exists() {
-            return Err(TrayError::IconLoadError(format!("Icon file not found: {:?}", path)));
-        }
+    fn create_default_icon(&self) -> Image {
+        // Create a simple default icon
+        let mut image = Image::new(aloe_graphics::PixelFormat::ARGB, 32, 32, true);
         
-        // Load image using aloe-image
-        // This is a placeholder - actual implementation depends on aloe-image API
-        let image = Image::new();
-        // image.load_from_file(path)?;
+        // Fill with a solid color for now
+        let bounds = image.get_bounds();
+        let g = aloe_graphics::Graphics::new(&mut image);
+        g.fill_all(Colour::from_rgb(100, 150, 200)); // Light blue color
         
-        Ok(image)
+        image
     }
     
     pub async fn update_tooltip(&mut self, tooltip: &str) -> Result<()> {
@@ -82,15 +81,23 @@ impl TrayIcon {
     }
     
     pub async fn handle_events(&mut self) {
-        // Event handling will be implemented based on aloe-events integration
-        // This is where we'll handle clicks, right-clicks, etc.
+        // The aloe-system-tray component handles events internally
+        // We can check for specific states or implement custom event handling
+        // based on the component's state
     }
     
     pub fn show(&mut self) {
-        // Show the tray icon
+        // The SystemTrayIconComponent is shown by default when created
+        // This method is here for API consistency
     }
     
     pub fn hide(&mut self) {
-        // Hide the tray icon
+        // To hide, we would need to destroy and recreate the component
+        // For now, we'll keep it visible
+    }
+    
+    pub fn get_position(&self) -> (i32, i32) {
+        let bounds = self.component.get_bounds();
+        (bounds.get_x(), bounds.get_y())
     }
 }

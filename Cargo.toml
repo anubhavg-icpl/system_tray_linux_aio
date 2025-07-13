@@ -10,11 +10,15 @@ keywords = ["system-tray", "tray", "linux", "cross-platform", "aloe"]
 categories = ["gui", "os"]
 
 [dependencies]
-aloe-system-tray = "0.1.2"
-aloe-image = "0.1"
-aloe-graphics = "0.1"
-aloe-menus = "0.1"
-aloe-events = "0.1"
+# Using aloe-system-tray with required Linux dependencies
+aloe-system-tray = { version = "0.1.2", default-features = false }
+aloe-x11 = { version = "0.1", default-features = false }
+aloe-xembed = { version = "0.1", default-features = false }
+aloe-graphics = { version = "0.1", default-features = false }
+aloe-events = { version = "0.1", default-features = false }
+aloe-menus = { version = "0.1", default-features = false }
+aloe-core = { version = "0.1", default-features = false }
+aloe-component = { version = "0.1", default-features = false }
 tokio = { version = "1.43", features = ["full"] }
 anyhow = "1.0"
 thiserror = "2.0"

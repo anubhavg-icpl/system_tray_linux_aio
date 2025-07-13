@@ -1,6 +1,8 @@
 # System Tray Linux AIO
 
-A production-ready system tray application built with Rust using the `aloe-system-tray` crate. This application provides cross-platform system tray functionality with a focus on Linux systems.
+A system tray application framework built with Rust, designed to use the `aloe-system-tray` crate. This project provides a production-ready structure for system tray applications on Linux.
+
+> **Note**: The `aloe-system-tray` crate (v0.1.2) is currently experiencing build issues on Linux due to platform-specific dependencies. See [ALOE_IMPLEMENTATION_GUIDE.md](ALOE_IMPLEMENTATION_GUIDE.md) for details and workarounds.
 
 ## Features
 

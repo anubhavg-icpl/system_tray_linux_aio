@@ -52,6 +52,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "aloe-alert-window"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1dab9f384aaa8c73bce780954fb33e6b2449275ecbd1e057a8917a041205756c"
+dependencies = [
+ "aloe-3p",
+ "aloe-buttons",
+ "aloe-combobox",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-dialogwindow",
+ "aloe-drag-and-drop",
+ "aloe-font",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-keyboard",
+ "aloe-label",
+ "aloe-mouse",
+ "aloe-progressbar",
+ "aloe-texteditor",
+ "aloe-windowing",
+]
+
+[[package]]
 name = "aloe-animation"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -93,6 +117,79 @@ dependencies = [
 ]
 
 [[package]]
+name = "aloe-audio-interface"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "61de3cf3ed5cc92f4d344ef57f7e5ec2dca81a853080b40c76cc366763f8d376"
+dependencies = [
+ "aloe-3p",
+ "aloe-bigint",
+ "aloe-buffers",
+ "aloe-colour",
+ "aloe-component",
+ "aloe-critical-section",
+ "aloe-derive",
+ "aloe-files",
+ "aloe-geometry",
+ "aloe-memory",
+ "aloe-menus",
+ "aloe-playhead",
+ "aloe-sample-type",
+ "aloe-time",
+ "aloe-xml",
+ "num",
+]
+
+[[package]]
+name = "aloe-bigint"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "313d700942c9bd79a3606e961f80bfa31fb2e712678e5d5148e38077e0f3a7ec"
+dependencies = [
+ "aloe-3p",
+ "aloe-derive",
+ "aloe-memory",
+ "aloe-text",
+]
+
+[[package]]
+name = "aloe-bubble"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "def1cde7084d1ffb726d3555fde62b9d774587be9844745b80e3974017dabd2f"
+dependencies = [
+ "aloe-3p",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-events",
+ "aloe-font",
+ "aloe-geometry",
+ "aloe-graphics",
+]
+
+[[package]]
+name = "aloe-buffers"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d6b66088acc34bc73f09158058934634d69d2fc4bba53eaa6b2ffe2ac4e3d81b"
+dependencies = [
+ "aloe-3p",
+ "aloe-bigint",
+ "aloe-derive",
+ "aloe-math",
+ "aloe-memory",
+ "atomic",
+ "bitfield",
+ "lazy_static",
+ "libc",
+ "modular-bitfield",
+ "num",
+ "parking_lot",
+ "static_assertions",
+ "wchar",
+]
+
+[[package]]
 name = "aloe-buttons"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -126,6 +223,37 @@ dependencies = [
 ]
 
 [[package]]
+name = "aloe-callout-box"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "32d2a3898ea740775f9f0cab01f1d0852fd5402c4c71fd42210fd620c9d06de7"
+dependencies = [
+ "aloe-3p",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-events",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-image",
+ "aloe-keyboard",
+ "aloe-time",
+]
+
+[[package]]
+name = "aloe-caret-component"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ad8d114939d4670d377d76c29668089d271c1da01f7218916d10225629e0930f"
+dependencies = [
+ "aloe-3p",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-events",
+ "aloe-geometry",
+ "aloe-graphics",
+]
+
+[[package]]
 name = "aloe-char"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -146,6 +274,27 @@ dependencies = [
  "aloe-geometry",
  "aloe-memory",
  "modular-bitfield",
+]
+
+[[package]]
+name = "aloe-combobox"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ca6bb11eba33fb7328648f815c9f079081ce5d447bcbb2a2269e84e393d7bbc4"
+dependencies = [
+ "aloe-3p",
+ "aloe-component",
+ "aloe-container",
+ "aloe-derive",
+ "aloe-events",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-keyboard",
+ "aloe-label",
+ "aloe-menus",
+ "aloe-mouse",
+ "aloe-network",
+ "aloe-valuetree",
 ]
 
 [[package]]
@@ -173,6 +322,23 @@ dependencies = [
  "aloe-valuetree",
  "aloe-variant",
  "modular-bitfield",
+]
+
+[[package]]
+name = "aloe-concertina"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a416d7a7bd632fee5a5117d8db2fd64f681ab6f445bd746bd7fbdec505459cc"
+dependencies = [
+ "aloe-3p",
+ "aloe-animation",
+ "aloe-component",
+ "aloe-container",
+ "aloe-derive",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-memory",
+ "aloe-mouse",
 ]
 
 [[package]]
@@ -241,6 +407,87 @@ dependencies = [
 ]
 
 [[package]]
+name = "aloe-desktop"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4d405d6356e2cc921c9ba785358a1886613f313f762dcd9f437163046e930f43"
+dependencies = [
+ "aloe-3p",
+ "aloe-animation",
+ "aloe-component",
+ "aloe-container",
+ "aloe-derive",
+ "aloe-events",
+ "aloe-geometry",
+ "aloe-lookandfeel",
+ "aloe-memory",
+ "aloe-mouse",
+ "aloe-network",
+ "atomic",
+ "bitfield",
+ "lazy_static",
+ "libc",
+ "modular-bitfield",
+ "num",
+ "parking_lot",
+ "static_assertions",
+ "wchar",
+]
+
+[[package]]
+name = "aloe-dialogwindow"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d14094b531a7a44beeeb9b1c001c26d065e6554554db6038f543001cef96dcd9"
+dependencies = [
+ "aloe-3p",
+ "aloe-colour",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-documentwindow",
+ "aloe-keyboard",
+ "aloe-memory",
+]
+
+[[package]]
+name = "aloe-documentwindow"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9eafe83f21d6c287cd87fc7023c8069becc5a2a87c5b3830e069151a62987103"
+dependencies = [
+ "aloe-3p",
+ "aloe-buttons",
+ "aloe-colour",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-image",
+ "aloe-menus",
+ "aloe-resizable",
+ "aloe-windowing",
+]
+
+[[package]]
+name = "aloe-drag-and-drop"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b36791668090582966165cbbd1ea4720530fb282c3dd2702b5d00a01af11ac33"
+dependencies = [
+ "aloe-3p",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-events",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-image",
+ "aloe-keyboard",
+ "aloe-memory",
+ "aloe-time",
+ "aloe-variant",
+]
+
+[[package]]
 name = "aloe-drawables"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -283,6 +530,54 @@ dependencies = [
  "aloe-threads",
  "core-foundation",
  "libc",
+]
+
+[[package]]
+name = "aloe-filebrowser"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0d35b64f47a03cee6f9e75c6f057ea6988d8a4427602e5ac39a87cb1806572da"
+dependencies = [
+ "aloe-3p",
+ "aloe-alert-window",
+ "aloe-buttons",
+ "aloe-colour",
+ "aloe-combobox",
+ "aloe-component",
+ "aloe-container",
+ "aloe-critical-section",
+ "aloe-derive",
+ "aloe-drag-and-drop",
+ "aloe-drawables",
+ "aloe-events",
+ "aloe-files",
+ "aloe-font",
+ "aloe-graphics",
+ "aloe-image",
+ "aloe-keyboard",
+ "aloe-label",
+ "aloe-listbox",
+ "aloe-memory",
+ "aloe-menus",
+ "aloe-mouse",
+ "aloe-network",
+ "aloe-resizable",
+ "aloe-texteditor",
+ "aloe-threads",
+ "aloe-time",
+ "aloe-treeview",
+ "aloe-url",
+ "aloe-variant",
+ "aloe-windowing",
+ "atomic",
+ "bitfield",
+ "lazy_static",
+ "libc",
+ "modular-bitfield",
+ "num",
+ "parking_lot",
+ "static_assertions",
+ "wchar",
 ]
 
 [[package]]
@@ -403,6 +698,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "aloe-interp"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f40f61aa31e4f92f9a28be59575e95a6ee45585e15b52db93754c9e93cc6c196"
+dependencies = [
+ "aloe-3p",
+ "aloe-derive",
+ "atomic",
+ "bitfield",
+ "lazy_static",
+ "libc",
+ "modular-bitfield",
+ "num",
+ "parking_lot",
+ "static_assertions",
+ "wchar",
+]
+
+[[package]]
 name = "aloe-keyboard"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -414,6 +728,27 @@ dependencies = [
  "aloe-geometry",
  "aloe-graphics",
  "bitflags 2.9.1",
+]
+
+[[package]]
+name = "aloe-label"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b88463a40133143fe773590d85871511ae4fafc045c97faa03b879522621295c"
+dependencies = [
+ "aloe-3p",
+ "aloe-component",
+ "aloe-container",
+ "aloe-derive",
+ "aloe-events",
+ "aloe-font",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-keyboard",
+ "aloe-memory",
+ "aloe-mouse",
+ "aloe-texteditor",
+ "aloe-valuetree",
 ]
 
 [[package]]
@@ -435,6 +770,75 @@ dependencies = [
  "aloe-scrollbar",
  "aloe-variant",
  "aloe-viewport",
+]
+
+[[package]]
+name = "aloe-lookandfeel"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f418df07299a038f49357f6e42d7648b342d28c5345bfc73b0a80d7adf161c80"
+dependencies = [
+ "aloe-3p",
+ "aloe-alert-window",
+ "aloe-bubble",
+ "aloe-buttons",
+ "aloe-callout-box",
+ "aloe-caret-component",
+ "aloe-colour",
+ "aloe-combobox",
+ "aloe-component",
+ "aloe-concertina",
+ "aloe-container",
+ "aloe-derive",
+ "aloe-dialogwindow",
+ "aloe-documentwindow",
+ "aloe-drawables",
+ "aloe-events",
+ "aloe-filebrowser",
+ "aloe-files",
+ "aloe-font",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-image",
+ "aloe-keyboard",
+ "aloe-label",
+ "aloe-menus",
+ "aloe-mouse",
+ "aloe-progressbar",
+ "aloe-properties",
+ "aloe-scrollbar",
+ "aloe-shadow",
+ "aloe-sidepanel",
+ "aloe-slider",
+ "aloe-tabbed",
+ "aloe-table",
+ "aloe-texteditor",
+ "aloe-toolbar",
+ "aloe-treeview",
+ "aloe-valuetree",
+ "aloe-windowing",
+]
+
+[[package]]
+name = "aloe-math"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "702eb5427f4558308a706af474aaa70a26ed8860b1525c328d18f0f53ae4f5ac"
+dependencies = [
+ "aloe-3p",
+ "aloe-derive",
+ "aloe-interp",
+ "aloe-system",
+ "aloe-test",
+ "atomic",
+ "bitfield",
+ "lazy_static",
+ "libc",
+ "modular-bitfield",
+ "num",
+ "parking_lot",
+ "static_assertions",
+ "wchar",
 ]
 
 [[package]]
@@ -549,6 +953,86 @@ dependencies = [
 ]
 
 [[package]]
+name = "aloe-playhead"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7061416d0012d41bbbbcc98017373e3cec527d61a2c3fc56bfa636df45247666"
+dependencies = [
+ "aloe-3p",
+ "aloe-derive",
+]
+
+[[package]]
+name = "aloe-progressbar"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4ca080edbbe9659f0f3967ecfe1abe6c6836681f3ea583ac7acb2d0b96640c1c"
+dependencies = [
+ "aloe-3p",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-events",
+ "aloe-graphics",
+ "aloe-mouse",
+]
+
+[[package]]
+name = "aloe-properties"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "175f73966cef1885229b7624f4e9f82b5a1a67471dc437155e943951d0e43bcb"
+dependencies = [
+ "aloe-3p",
+ "aloe-buttons",
+ "aloe-combobox",
+ "aloe-component",
+ "aloe-container",
+ "aloe-derive",
+ "aloe-drag-and-drop",
+ "aloe-events",
+ "aloe-files",
+ "aloe-graphics",
+ "aloe-identifier",
+ "aloe-label",
+ "aloe-memory",
+ "aloe-mouse",
+ "aloe-slider",
+ "aloe-texteditor",
+ "aloe-threads",
+ "aloe-time",
+ "aloe-valuetree",
+ "aloe-variant",
+ "aloe-viewport",
+ "aloe-xml",
+]
+
+[[package]]
+name = "aloe-resizable"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8e4065a7e9f6b65b9b25d0361032eb19960f1763190d6fb645abc69bce174a27"
+dependencies = [
+ "aloe-3p",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-memory",
+ "aloe-mouse",
+]
+
+[[package]]
+name = "aloe-sample-type"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "232fde879c6ad331c14015ef994518c42c6d07107c88968ed6c06b491f11838e"
+dependencies = [
+ "aloe-3p",
+ "aloe-derive",
+ "num",
+]
+
+[[package]]
 name = "aloe-scrollbar"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -563,6 +1047,64 @@ dependencies = [
  "aloe-graphics",
  "aloe-keyboard",
  "aloe-network",
+]
+
+[[package]]
+name = "aloe-shadow"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "12855cbf656a65e465b373eee424b0e152b167456bd82ac3ee019cfc7e0c1d33"
+dependencies = [
+ "aloe-3p",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-graphics",
+ "aloe-memory",
+]
+
+[[package]]
+name = "aloe-sidepanel"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a21ee70fd3a04923aab6acb06041a5eef2289a13b3d5f330cf60a1143616a7c"
+dependencies = [
+ "aloe-3p",
+ "aloe-buttons",
+ "aloe-component",
+ "aloe-container",
+ "aloe-derive",
+ "aloe-events",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-label",
+ "aloe-memory",
+ "aloe-mouse",
+]
+
+[[package]]
+name = "aloe-slider"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bc8b723f7bc11ce90c18cf7483b0782e49e0bce9bc736b7acddab170c18c1146"
+dependencies = [
+ "aloe-3p",
+ "aloe-bubble",
+ "aloe-buttons",
+ "aloe-component",
+ "aloe-container",
+ "aloe-derive",
+ "aloe-events",
+ "aloe-font",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-keyboard",
+ "aloe-label",
+ "aloe-math",
+ "aloe-memory",
+ "aloe-mouse",
+ "aloe-network",
+ "aloe-time",
+ "aloe-valuetree",
 ]
 
 [[package]]
@@ -601,6 +1143,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "aloe-system"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4102450e2f6daca8dc4f4f853736dbd54612c74e39dbcbafccd4d14b28eb9d36"
+dependencies = [
+ "aloe-3p",
+ "aloe-derive",
+ "aloe-text",
+]
+
+[[package]]
 name = "aloe-system-tray"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -619,6 +1172,47 @@ dependencies = [
  "icrate",
  "objc",
  "objc_id",
+]
+
+[[package]]
+name = "aloe-tabbed"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8d83fbc3fa03ae8964bc737326ab159a61745a0933cebf751314b288bfa032e6"
+dependencies = [
+ "aloe-3p",
+ "aloe-buttons",
+ "aloe-colour",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-events",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-identifier",
+ "aloe-keyboard",
+ "aloe-memory",
+]
+
+[[package]]
+name = "aloe-table"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "eb03136c42c694caddb472eb0bcd8693d5c1977a8443b6fcc9fdbb700d398267"
+dependencies = [
+ "aloe-3p",
+ "aloe-component",
+ "aloe-container",
+ "aloe-derive",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-image",
+ "aloe-keyboard",
+ "aloe-listbox",
+ "aloe-menus",
+ "aloe-mouse",
+ "aloe-network",
+ "aloe-variant",
+ "bitflags 2.9.1",
 ]
 
 [[package]]
@@ -641,6 +1235,32 @@ dependencies = [
  "aloe-char",
  "aloe-derive",
  "aloe-string",
+]
+
+[[package]]
+name = "aloe-texteditor"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e42a1564e879342b8a160500fc231cb0b1b31f896629c927c527ffb5ae8aa3da"
+dependencies = [
+ "aloe-3p",
+ "aloe-caret-component",
+ "aloe-colour",
+ "aloe-component",
+ "aloe-container",
+ "aloe-derive",
+ "aloe-events",
+ "aloe-font",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-keyboard",
+ "aloe-memory",
+ "aloe-menus",
+ "aloe-mouse",
+ "aloe-streams",
+ "aloe-undo",
+ "aloe-valuetree",
+ "aloe-viewport",
 ]
 
 [[package]]
@@ -689,6 +1309,50 @@ dependencies = [
  "parking_lot",
  "static_assertions",
  "wchar",
+]
+
+[[package]]
+name = "aloe-toolbar"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6ec7885ce6d89ecb3b27940e87e93f79737f0d1eefe96d9b2df8c14800cb8626"
+dependencies = [
+ "aloe-3p",
+ "aloe-buttons",
+ "aloe-combobox",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-dialogwindow",
+ "aloe-drag-and-drop",
+ "aloe-drawables",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-label",
+ "aloe-menus",
+ "aloe-mouse",
+ "aloe-viewport",
+]
+
+[[package]]
+name = "aloe-treeview"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "077286a09ca0e89cf46ca0987a8689bb911f2fd43fc6e036c5cb2a2e219e86ff"
+dependencies = [
+ "aloe-3p",
+ "aloe-colour",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-drag-and-drop",
+ "aloe-events",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-keyboard",
+ "aloe-mouse",
+ "aloe-network",
+ "aloe-variant",
+ "aloe-viewport",
+ "aloe-xml",
 ]
 
 [[package]]
@@ -777,6 +1441,62 @@ dependencies = [
  "aloe-keyboard",
  "aloe-memory",
  "aloe-scrollbar",
+]
+
+[[package]]
+name = "aloe-windowing"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a5d2d5c29c65f9cdaf1301bd9d6bde26ecf4861535f876c6622d4fa4a2bd782"
+dependencies = [
+ "aloe-3p",
+ "aloe-audio-interface",
+ "aloe-colour",
+ "aloe-component",
+ "aloe-critical-section",
+ "aloe-derive",
+ "aloe-drag-and-drop",
+ "aloe-events",
+ "aloe-files",
+ "aloe-font",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-image",
+ "aloe-keyboard",
+ "aloe-memory",
+ "aloe-mouse",
+ "aloe-resizable",
+ "aloe-shadow",
+ "aloe-string",
+ "aloe-threads",
+ "aloe-time",
+ "aloe-xembed",
+ "cocoa",
+]
+
+[[package]]
+name = "aloe-x11"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "60890b03c18d0d2016d31353a727280c577920562856088bf80708f84bd9da80"
+dependencies = [
+ "aloe-3p",
+ "aloe-component",
+ "aloe-derive",
+ "aloe-desktop",
+ "aloe-events",
+ "aloe-geometry",
+ "aloe-graphics",
+ "aloe-image",
+ "aloe-keyboard",
+ "aloe-memory",
+ "aloe-mouse",
+ "aloe-string",
+ "aloe-threads",
+ "aloe-time",
+ "aloe-windowing",
+ "aloe-xembed",
+ "x11",
 ]
 
 [[package]]
@@ -2210,11 +2930,14 @@ dependencies = [
 name = "system_tray_linux_aio"
 version = "0.1.0"
 dependencies = [
+ "aloe-component",
+ "aloe-core",
  "aloe-events",
  "aloe-graphics",
- "aloe-image",
  "aloe-menus",
  "aloe-system-tray",
+ "aloe-x11",
+ "aloe-xembed",
  "anyhow",
  "dirs",
  "once_cell",
@@ -2223,7 +2946,7 @@ dependencies = [
  "tempfile",
  "thiserror 2.0.12",
  "tokio",
- "toml 0.8.23",
+ "toml 0.8.2",
  "tracing",
  "tracing-subscriber",
 ]
@@ -2338,9 +3061,9 @@ dependencies = [
 
 [[package]]
 name = "toml"
-version = "0.8.23"
+version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc1beb996b9d83529a9e75c17a1686767d148d70663143c7854d8b4a09ced362"
+checksum = "185d8ab0dfbb35cf1399a6344d8484209c088f75f8f68230da55d48d95d43e3d"
 dependencies = [
  "serde",
  "serde_spanned",
@@ -2350,32 +3073,25 @@ dependencies = [
 
 [[package]]
 name = "toml_datetime"
-version = "0.6.11"
+version = "0.6.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "22cddaf88f4fbc13c51aebbf5f8eceb5c7c5a9da2ac40a13519eb5b0a0e8f11c"
+checksum = "7cda73e2f1397b1262d6dfdcef8aafae14d1de7748d66822d3bfeeb6d03e5e4b"
 dependencies = [
  "serde",
 ]
 
 [[package]]
 name = "toml_edit"
-version = "0.22.27"
+version = "0.20.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "41fe8c660ae4257887cf66394862d21dbca4a6ddd26f04a3560410406a2f819a"
+checksum = "396e4d48bbb2b7554c944bde63101b5ae446cff6ec4a24227428f15eb72ef338"
 dependencies = [
  "indexmap",
  "serde",
  "serde_spanned",
  "toml_datetime",
- "toml_write",
  "winnow",
 ]
-
-[[package]]
-name = "toml_write"
-version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5d99f8c9a7727884afe522e9bd5edbfc91a3312b36a77b5fb8926e4c31a41801"
 
 [[package]]
 name = "tracing"
@@ -2860,9 +3576,9 @@ checksum = "271414315aff87387382ec3d271b52d7ae78726f5d44ac98b4f4030c91880486"
 
 [[package]]
 name = "winnow"
-version = "0.7.12"
+version = "0.5.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f3edebf492c8125044983378ecb5766203ad3b4c2f7a922bd7dd207f6d443e95"
+checksum = "f593a95398737aeed53e489c785df13f3618e41dbcd6718c6addbf1395aa6876"
 dependencies = [
  "memchr",
 ]
@@ -2874,6 +3590,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6f42320e61fe2cfd34354ecb597f86f413484a798ba44a8ca1165c58d42da6c1"
 dependencies = [
  "bitflags 2.9.1",
+]
+
+[[package]]
+name = "x11"
+version = "2.21.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "502da5464ccd04011667b11c435cb992822c2c0dbde1770c988480d312a0db2e"
+dependencies = [
+ "libc",
+ "pkg-config",
 ]
 
 [[package]]
