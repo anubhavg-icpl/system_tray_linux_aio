@@ -2,6 +2,7 @@ pub mod config;
 pub mod error;
 pub mod menu;
 pub mod tray;
+pub mod contrib;
 
 pub use config::AppConfig;
 pub use error::{TrayError, Result};

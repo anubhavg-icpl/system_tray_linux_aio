@@ -2,28 +2,24 @@ use std::sync::Arc;
 use tokio::sync::RwLock;
 use crate::config::AppConfig;
 use crate::error::{Result, TrayError};
-
-// When aloe-menus build issues are resolved, uncomment:
-// use aloe_menus::{PopupMenu, ApplicationCommandTarget};
-// use aloe_system_tray::SystemTrayIconComponent;
+use crate::tray::{SystemTrayIconComponent, PopupMenu};
 
 pub struct TrayMenu {
     config: Arc<RwLock<AppConfig>>,
-    // When aloe-menus build issues are resolved:
-    // menu: aloe_menus::PopupMenu,
+    menu: PopupMenu,
 }
 
 impl TrayMenu {
     pub async fn new(config: Arc<RwLock<AppConfig>>) -> Result<Self> {
-        // When aloe-menus build issues are resolved:
-        // let menu = aloe_menus::PopupMenu::new();
+        let menu = PopupMenu;
         
         Ok(Self {
             config,
+            menu,
         })
     }
     
-    pub async fn setup_menu(&mut self, _tray: &mut crate::tray::TrayIcon) -> Result<()> {
+    pub async fn setup_menu(&mut self, tray: &mut SystemTrayIconComponent) -> Result<()> {
         let config = self.config.read().await;
         
         tracing::info!("Setting up menu:");
@@ -47,8 +43,8 @@ impl TrayMenu {
             tracing::info!("  - Quit");
         }
         
-        // When aloe-menus build issues are resolved:
-        // Actually create and populate the menu using aloe_menus::PopupMenu
+        // When aloe-menus is properly implemented, we'll use:
+        // tray.show_dropdown_menu(&self.menu);
         
         Ok(())
     }
