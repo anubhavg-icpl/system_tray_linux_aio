@@ -1,7 +1,7 @@
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use crate::config::AppConfig;
-use crate::error::{Result, TrayError};
+use crate::error::Result;
 use crate::menu::TrayMenu;
 
 // The aloe-system-tray API based on the actual crate structure

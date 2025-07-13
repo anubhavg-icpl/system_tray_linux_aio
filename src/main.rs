@@ -1,11 +1,11 @@
 use anyhow::Result;
-use system_tray_linux_aio::{AppConfig, MenuAction};
+use system_tray_linux_aio::AppConfig;
 use tracing::{info, error};
 
 #[cfg(target_os = "linux")]
 mod linux_tray {
     use super::*;
-    use std::process::Command;
+    
     
     pub struct LinuxTrayApp {
         config: AppConfig,

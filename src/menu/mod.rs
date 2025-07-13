@@ -1,7 +1,7 @@
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use crate::config::AppConfig;
-use crate::error::{Result, TrayError};
+use crate::error::Result;
 use crate::tray::{SystemTrayIconComponent, PopupMenu};
 
 pub struct TrayMenu {
@@ -19,7 +19,7 @@ impl TrayMenu {
         })
     }
     
-    pub async fn setup_menu(&mut self, tray: &mut SystemTrayIconComponent) -> Result<()> {
+    pub async fn setup_menu(&mut self, _tray: &mut SystemTrayIconComponent) -> Result<()> {
         let config = self.config.read().await;
         
         tracing::info!("Setting up menu:");

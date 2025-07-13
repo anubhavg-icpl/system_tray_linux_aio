@@ -6,6 +6,7 @@
 use std::ffi::CString;
 
 // These would come from aloe-x11 and aloe-xembed
+#[allow(non_snake_case)]
 mod x11_bindings {
     pub type Display = *mut std::ffi::c_void;
     pub type Window = u64;
@@ -13,9 +14,9 @@ mod x11_bindings {
     pub type Pixmap = u64;
     
     pub const XA_ATOM: Atom = 4;
-    pub const CurrentTime: u64 = 0;
+    pub const CURRENT_TIME: u64 = 0;
     
-    // Simulated X11 functions
+    // Simulated X11 functions (keeping original names for X11 compatibility)
     pub unsafe fn XOpenDisplay(_name: *const i8) -> Display { std::ptr::null_mut() }
     pub unsafe fn XCloseDisplay(_display: Display) -> i32 { 0 }
     pub unsafe fn XInternAtom(_display: Display, _name: *const i8, _only_if_exists: i32) -> Atom { 0 }
@@ -76,7 +77,7 @@ impl LinuxSystemTrayIconComponent {
         }
     }
     
-    pub fn set_icon_from_rgba(&mut self, rgba_data: &[u8], width: u32, height: u32) -> Result<(), String> {
+    pub fn set_icon_from_rgba(&mut self, _rgba_data: &[u8], width: u32, height: u32) -> Result<(), String> {
         // Implementation would:
         // 1. Create X11 Pixmap from RGBA data
         // 2. Set _NET_WM_ICON property
