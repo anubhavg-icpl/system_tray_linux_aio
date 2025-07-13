@@ -2,6 +2,9 @@ use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use crate::error::Result;
 
+#[cfg(test)]
+mod tests;
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppConfig {
     pub app_name: String,
