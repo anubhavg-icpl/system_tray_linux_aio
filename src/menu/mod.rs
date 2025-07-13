@@ -1,68 +1,54 @@
-use aloe_menus::{PopupMenu, ApplicationCommandTarget};
-use aloe_system_tray::SystemTrayIconComponent;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use crate::config::AppConfig;
 use crate::error::{Result, TrayError};
 
+// When aloe-menus build issues are resolved, uncomment:
+// use aloe_menus::{PopupMenu, ApplicationCommandTarget};
+// use aloe_system_tray::SystemTrayIconComponent;
+
 pub struct TrayMenu {
     config: Arc<RwLock<AppConfig>>,
-    menu: PopupMenu,
+    // When aloe-menus build issues are resolved:
+    // menu: aloe_menus::PopupMenu,
 }
 
 impl TrayMenu {
     pub async fn new(config: Arc<RwLock<AppConfig>>) -> Result<Self> {
-        let menu = PopupMenu::new();
+        // When aloe-menus build issues are resolved:
+        // let menu = aloe_menus::PopupMenu::new();
         
         Ok(Self {
             config,
-            menu,
         })
     }
     
-    pub async fn setup_menu(&mut self, tray: &mut SystemTrayIconComponent) -> Result<()> {
+    pub async fn setup_menu(&mut self, _tray: &mut crate::tray::TrayIcon) -> Result<()> {
         let config = self.config.read().await;
         
-        self.menu.clear();
+        tracing::info!("Setting up menu:");
         
-        // Add custom menu items
-        for (index, item) in config.menu_config.custom_items.iter().enumerate() {
-            self.menu.add_item(
-                index + 1,
-                &item.label,
-                item.enabled,
-                false // ticked
-            );
-            
+        // Log custom menu items
+        for item in &config.menu_config.custom_items {
+            tracing::info!("  - {} (action: {})", item.label, item.action);
             if item.separator_after {
-                self.menu.add_separator();
+                tracing::info!("  ---separator---");
             }
         }
         
-        // Add default items
-        if !config.menu_config.custom_items.is_empty() && 
-           (config.menu_config.show_about || config.menu_config.show_settings || config.menu_config.show_quit) {
-            self.menu.add_separator();
-        }
-        
-        let mut next_id = config.menu_config.custom_items.len() + 1;
-        
+        // Log default items
         if config.menu_config.show_about {
-            self.menu.add_item(next_id, "About", true, false);
-            next_id += 1;
+            tracing::info!("  - About");
         }
-        
         if config.menu_config.show_settings {
-            self.menu.add_item(next_id, "Settings", true, false);
-            next_id += 1;
+            tracing::info!("  - Settings");
+        }
+        if config.menu_config.show_quit {
+            tracing::info!("  - Quit");
         }
         
-        if config.menu_config.show_quit {
-            if config.menu_config.show_about || config.menu_config.show_settings {
-                self.menu.add_separator();
-            }
-            self.menu.add_item(next_id, "Quit", true, false);
-        }
+        // When aloe-menus build issues are resolved:
+        // Actually create and populate the menu using aloe_menus::PopupMenu
         
         Ok(())
     }
@@ -100,25 +86,6 @@ impl TrayMenu {
                 }
             },
             _ => Ok(None),
-        }
-    }
-    
-    pub fn show_menu(&mut self, component: &SystemTrayIconComponent) -> Option<i32> {
-        // Show the popup menu at the tray icon position
-        let bounds = component.get_bounds();
-        let result = self.menu.show_menu_async(
-            bounds.get_x(),
-            bounds.get_y(),
-            0, // minimum width
-            0, // maximum number of columns
-            None, // no target component
-            None  // no callback
-        );
-        
-        if result > 0 {
-            Some(result)
-        } else {
-            None
         }
     }
 }

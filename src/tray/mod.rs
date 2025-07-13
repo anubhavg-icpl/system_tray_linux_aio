@@ -2,22 +2,16 @@ use std::sync::Arc;
 use tokio::sync::RwLock;
 use crate::config::AppConfig;
 use crate::error::{Result, TrayError};
-use crate::menu::TrayMenu;
+use crate::menu::{TrayMenu, MenuAction};
 
 #[cfg(target_os = "linux")]
 mod linux_impl;
 
-// Placeholder imports for aloe crates
-// These will be used when the build issues are resolved
-// use aloe_system_tray::SystemTrayIconComponent;
-// use aloe_graphics::{Image, Colour};
-// use aloe_menus::{PopupMenu};
-// use aloe_events::{MouseEvent};
-
 pub struct TrayIcon {
-    component: SystemTrayIconComponent,
     config: Arc<RwLock<AppConfig>>,
     menu: TrayMenu,
+    // When aloe-system-tray build issues are resolved, uncomment:
+    // component: aloe_system_tray::SystemTrayIconComponent,
 }
 
 impl TrayIcon {
@@ -25,10 +19,10 @@ impl TrayIcon {
         let config = Arc::new(RwLock::new(config));
         let menu = TrayMenu::new(config.clone()).await?;
         
-        let component = SystemTrayIconComponent::new();
+        // When aloe-system-tray build issues are resolved:
+        // let component = aloe_system_tray::SystemTrayIconComponent::new();
         
         Ok(Self {
-            component,
             config,
             menu,
         })
@@ -37,67 +31,51 @@ impl TrayIcon {
     pub async fn initialize(&mut self) -> Result<()> {
         let config = self.config.read().await;
         
-        // Create images for the tray icon
-        let colour_image = self.create_default_icon();
-        let template_image = colour_image.clone();
+        tracing::info!("Initializing system tray icon...");
+        tracing::info!("App: {}", config.app_name);
+        tracing::info!("Tooltip: {}", config.tooltip);
         
-        // Set up the icon
-        self.component.set_icon_image(&colour_image, &template_image);
+        // When aloe-system-tray build issues are resolved:
+        // - Create icon images using aloe_graphics
+        // - Set icon using component.set_icon_image()
+        // - Set tooltip using component.set_icon_tooltip()
+        // - Set up menu using menu.setup_menu()
         
-        // Set tooltip
-        self.component.set_icon_tooltip(&config.tooltip);
-        
-        // Set up menu
-        self.menu.setup_menu(&mut self.component).await?;
-        
-        tracing::info!("System tray icon initialized successfully");
+        tracing::info!("System tray icon initialized (placeholder implementation)");
         Ok(())
     }
     
-    fn create_default_icon(&self) -> Image {
-        // Create a simple default icon
-        let mut image = Image::new(aloe_graphics::PixelFormat::ARGB, 32, 32, true);
-        
-        // Fill with a solid color for now
-        let bounds = image.get_bounds();
-        let g = aloe_graphics::Graphics::new(&mut image);
-        g.fill_all(Colour::from_rgb(100, 150, 200)); // Light blue color
-        
-        image
-    }
-    
     pub async fn update_tooltip(&mut self, tooltip: &str) -> Result<()> {
-        self.component.set_icon_tooltip(tooltip);
+        // When aloe-system-tray build issues are resolved:
+        // self.component.set_icon_tooltip(tooltip);
         
         let mut config = self.config.write().await;
         config.tooltip = tooltip.to_string();
         config.save()?;
         
+        tracing::info!("Updated tooltip to: {}", tooltip);
         Ok(())
     }
     
     pub async fn set_highlighted(&mut self, highlighted: bool) {
-        self.component.set_highlighted(highlighted);
+        // When aloe-system-tray build issues are resolved:
+        // self.component.set_highlighted(highlighted);
+        
+        tracing::info!("Set highlighted: {}", highlighted);
     }
     
     pub async fn handle_events(&mut self) {
-        // The aloe-system-tray component handles events internally
-        // We can check for specific states or implement custom event handling
-        // based on the component's state
+        // When aloe-system-tray build issues are resolved:
+        // Check for menu events and handle them
+        
+        tracing::debug!("Handling events (placeholder)");
     }
     
     pub fn show(&mut self) {
-        // The SystemTrayIconComponent is shown by default when created
-        // This method is here for API consistency
+        tracing::info!("Showing system tray icon");
     }
     
     pub fn hide(&mut self) {
-        // To hide, we would need to destroy and recreate the component
-        // For now, we'll keep it visible
-    }
-    
-    pub fn get_position(&self) -> (i32, i32) {
-        let bounds = self.component.get_bounds();
-        (bounds.get_x(), bounds.get_y())
+        tracing::info!("Hiding system tray icon");
     }
 }
