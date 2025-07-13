@@ -2,29 +2,21 @@
 name = "system_tray_linux_aio"
 version = "0.1.0"
 edition = "2021"
-authors = ["Your Name <your.email@example.com>"]
+authors = ["Anubhav Gain <anubhavg@infopercept.com>"]
 description = "A production-ready system tray application using aloe-system-tray"
-repository = "https://github.com/yourusername/system_tray_linux_aio"
+repository = "https://github.com/anubhavg-icpl/system_tray_linux_aio"
 license = "GPL-3.0"
 keywords = ["system-tray", "tray", "linux", "cross-platform", "aloe"]
 categories = ["gui", "os"]
 
 [dependencies]
-# Aloe crates - temporarily commented due to build issues on Linux
-# See ALOE_IMPLEMENTATION_GUIDE.md for details
-# aloe-system-tray = { version = "0.1.2", default-features = false }
-# aloe-x11 = { version = "0.1", default-features = false }
-# aloe-xembed = { version = "0.1", default-features = false }
-# aloe-graphics = { version = "0.1", default-features = false }
-# aloe-events = { version = "0.1", default-features = false }
-# aloe-menus = { version = "0.1", default-features = false }
-# aloe-core = { version = "0.1", default-features = false }
-# aloe-component = { version = "0.1", default-features = false }
-
-# Working system tray implementation for Linux
+# Working system tray implementation
 tray-icon = "0.21"
 image = "0.25"
 gtk = "0.18"
+
+# NOTE: aloe-system-tray has build issues on Linux due to macOS dependencies
+# We implement a compatibility layer that matches its API
 
 tokio = { version = "1.43", features = ["full"] }
 anyhow = "1.0"

@@ -10,6 +10,8 @@ The main issues encountered:
 1. **objc-sys dependency**: The crate includes macOS-specific dependencies (objc, cocoa) that fail to build on Linux
 2. **Missing Linux feature flags**: The crate doesn't appear to have proper feature flags to exclude macOS dependencies on Linux
 3. **Incomplete translation**: As noted in the aloe-rs repository, many functions are still C++ code awaiting translation
+4. **Nightly Rust requirement**: The aloe-3p crate requires nightly Rust features (#![feature(test)] and #![feature(adt_const_params)])
+5. **Extensive dependency tree**: All aloe crates depend on aloe-3p which has the macOS dependencies
 
 ## Working with Aloe System Tray on Linux
 
@@ -67,12 +69,24 @@ If you want to help make aloe-system-tray work better on Linux, consider:
 - Submitting PRs with Linux fixes
 - Helping translate the C++ code
 
+## Current Status of Aloe Integration (2025)
+
+After attempting to integrate the aloe crates, we discovered:
+- The aloe-3p base crate has hardcoded macOS dependencies (cocoa, objc-sys)
+- It requires nightly Rust features not available on stable
+- All aloe crates transitively depend on aloe-3p, making them unusable on Linux
+- The crates need significant refactoring to support Linux properly
+
 ## Alternative Solutions
 
 If you need a working system tray solution immediately, consider:
-1. `tray-icon` - More mature and actively maintained
+1. `tray-icon` - More mature and actively maintained (currently used in this project)
 2. `ksni` - KDE StatusNotifierItem implementation
 3. `libappindicator` bindings - For Ubuntu/GNOME systems
+
+## Recommendation
+
+Until the aloe-rs project resolves these Linux compatibility issues, it's recommended to use the existing tray-icon implementation which is working and stable.
 
 ## Resources
 
