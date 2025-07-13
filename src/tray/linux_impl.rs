@@ -3,7 +3,7 @@
 
 #[cfg(target_os = "linux")]
 pub mod linux {
-    use crate::error::{Result, TrayError};
+    use crate::error::Result;
     use crate::config::AppConfig;
     
     pub struct LinuxTrayIcon {

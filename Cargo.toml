@@ -20,6 +20,12 @@ categories = ["gui", "os"]
 # aloe-menus = { version = "0.1", default-features = false }
 # aloe-core = { version = "0.1", default-features = false }
 # aloe-component = { version = "0.1", default-features = false }
+
+# Working system tray implementation for Linux
+tray-icon = "0.21"
+image = "0.25"
+gtk = "0.18"
+
 tokio = { version = "1.43", features = ["full"] }
 anyhow = "1.0"
 thiserror = "2.0"
