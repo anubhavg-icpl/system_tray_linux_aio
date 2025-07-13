@@ -28,8 +28,14 @@ pub struct Rectangle {
 }
 
 impl Rectangle {
+    pub fn new(x: i32, y: i32, width: i32, height: i32) -> Self {
+        Self { x, y, width, height }
+    }
+    
     pub fn get_x(&self) -> i32 { self.x }
     pub fn get_y(&self) -> i32 { self.y }
+    pub fn get_width(&self) -> i32 { self.width }
+    pub fn get_height(&self) -> i32 { self.height }
 }
 
 pub struct SystemTrayIconComponent {
@@ -68,7 +74,7 @@ impl SystemTrayIconComponentInterface for SystemTrayIconComponent {
     }
 
     fn get_bounds(&self) -> Rectangle {
-        Rectangle { x: 0, y: 0, width: 32, height: 32 }
+        Rectangle::new(0, 0, 32, 32)
     }
 }
 

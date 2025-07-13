@@ -6,6 +6,7 @@ use crate::tray::{SystemTrayIconComponent, PopupMenu};
 
 pub struct TrayMenu {
     config: Arc<RwLock<AppConfig>>,
+    #[allow(dead_code)]
     menu: PopupMenu,
 }
 
