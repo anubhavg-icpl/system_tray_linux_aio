@@ -6,12 +6,14 @@ pub mod linux {
     use crate::error::Result;
     use crate::config::AppConfig;
     
+    #[allow(dead_code)]
     pub struct LinuxTrayIcon {
         config: AppConfig,
         // x11_connection: aloe_x11::Connection,
         // xembed_window: aloe_xembed::Window,
     }
     
+    #[allow(dead_code)]
     impl LinuxTrayIcon {
         pub fn new(config: AppConfig) -> Result<Self> {
             // TODO: Initialize X11 connection
@@ -23,12 +25,12 @@ pub mod linux {
             })
         }
         
-        pub fn set_icon(&mut self, icon_data: &[u8]) -> Result<()> {
+        pub fn set_icon(&mut self, _icon_data: &[u8]) -> Result<()> {
             // TODO: Update icon using X11
             Ok(())
         }
         
-        pub fn set_tooltip(&mut self, tooltip: &str) -> Result<()> {
+        pub fn set_tooltip(&mut self, _tooltip: &str) -> Result<()> {
             // TODO: Set tooltip using X11 properties
             Ok(())
         }
