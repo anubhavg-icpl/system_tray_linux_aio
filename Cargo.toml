@@ -1,6 +1,39 @@
 [package]
 name = "system_tray_linux_aio"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "A production-ready system tray application using aloe-system-tray"
+repository = "https://github.com/yourusername/system_tray_linux_aio"
+license = "GPL-3.0"
+keywords = ["system-tray", "tray", "linux", "cross-platform", "aloe"]
+categories = ["gui", "os"]
 
 [dependencies]
+aloe-system-tray = "0.1.2"
+aloe-image = "0.1"
+aloe-graphics = "0.1"
+aloe-menus = "0.1"
+aloe-events = "0.1"
+tokio = { version = "1.43", features = ["full"] }
+anyhow = "1.0"
+thiserror = "2.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+dirs = "5.0"
+once_cell = "1.21"
+
+[dev-dependencies]
+tempfile = "3.14"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+
+[profile.dev]
+opt-level = 0
