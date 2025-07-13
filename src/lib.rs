@@ -4,6 +4,7 @@ pub mod menu;
 pub mod tray;
 pub mod contrib;
 pub mod aloe_compat;
+pub mod stray_impl;
 
 pub use config::AppConfig;
 pub use error::{TrayError, Result};

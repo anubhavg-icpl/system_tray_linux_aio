@@ -1,18 +1,26 @@
 # System Tray Linux AIO
 
-A production-ready system tray application framework for Linux with aloe-system-tray API compatibility.
+A production-ready system tray application framework for Linux using the modern `stray` crate, with aloe-system-tray API compatibility.
 
-> **Note**: The original `aloe-system-tray` crate has build issues on Linux due to macOS dependencies. This project provides a compatibility layer that implements the aloe API using working Linux libraries.
+> **Note**: This project now uses the `stray` crate - a minimal and modern StatusNotifierWatcher implementation for Linux system trays.
 
 ## Features
 
-- 🖼️ **aloe-system-tray API Compatibility**: Use the same API as aloe-system-tray
-- 📋 **Cross-platform Design**: Implements the aloe pattern for future portability
-- 🎯 **Event Handling**: Full mouse event and menu interaction support
-- ⚙️ **Configuration System**: TOML-based configuration with hot-reload support
+- 🖼️ **Modern System Tray API**: Uses `stray` for reliable Linux tray functionality
+- 📋 **StatusNotifierWatcher**: Full support for the freedesktop.org standard
+- 🎯 **Event-Driven Architecture**: React to tray icon updates and removals
+- ⚙️ **Menu Interaction**: Send menu click commands programmatically
 - 📝 **Comprehensive Logging**: Built-in logging with configurable levels
 - 🚀 **Async/Await Support**: Built on Tokio for efficient async operations
 - 🛡️ **Error Handling**: Robust error handling with custom error types
+- 🔄 **aloe-system-tray Compatibility**: Optional compatibility layer for aloe API
+
+## Architecture
+
+The project now uses `stray` - a minimal SystemNotifierWatcher implementation that provides:
+- Monitoring of system tray icons
+- Menu interaction capabilities
+- Event streaming for tray updates
 
 ## Installation
 
@@ -23,84 +31,87 @@ Add this to your `Cargo.toml`:
 system_tray_linux_aio = "0.1.0"
 ```
 
-## Quick Start - aloe-system-tray API
+## Quick Start - Stray API
 
 ```rust
-use system_tray_linux_aio::aloe_compat::{SystemTrayIconComponent, create_icon_image};
-
-// Following the aloe-system-tray example pattern
-impl SystemTrayIconComponent {
-    fn setup_icon(&mut self) {
-        let colour_image = create_icon_image();
-        let template_image = colour_image.clone();
-        
-        self.set_icon_image(&colour_image, &template_image);
-        self.set_icon_tooltip("Application running");
-        self.set_highlighted(true);
-    }
-}
-```
-
-## Full Example
-
-```rust
-use system_tray_linux_aio::aloe_compat::*;
+use system_tray_linux_aio::stray_impl::StrayTrayApp;
+use system_tray_linux_aio::AppConfig;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // Initialize GTK (required on Linux)
-    gtk::init()?;
+    // Create configuration
+    let config = AppConfig::default();
     
-    // Create system tray component
-    let mut tray = SystemTrayIconComponent::new();
-    
-    // Create icon
-    let icon = create_icon_image();
-    
-    // Setup icon (aloe API)
-    tray.set_icon_image(&icon, &icon);
-    tray.set_icon_tooltip("My Application");
-    tray.set_highlighted(false);
-    
-    // Create menu
-    let mut menu = PopupMenu::new();
-    menu.add_item(1, "About", true, false)?;
-    menu.add_item(2, "Settings", true, false)?;
-    menu.add_separator()?;
-    menu.add_item(3, "Quit", true, false)?;
-    
-    // Initialize and show
-    tray.initialize_tray(&menu);
-    
-    // Event loop
-    loop {
-        if let Some(menu_id) = MenuEventReceiver::try_recv() {
-            match menu_id {
-                3 => break, // Quit
-                1 => println!("About clicked"),
-                2 => println!("Settings clicked"),
-                _ => {}
-            }
-        }
-        
-        tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
-    }
+    // Create and run the tray app
+    let app = StrayTrayApp::new(config);
+    app.run().await?;
     
     Ok(())
 }
 ```
 
-## API Compatibility
+## Full Example with Menu Interaction
 
-This project implements the following aloe-system-tray API methods:
+```rust
+use stray::{SystemTray, message::{NotifierItemMessage, NotifierItemCommand}};
+use tokio_stream::StreamExt;
 
-- `SystemTrayIconComponent::new()` - Create a new tray component
-- `set_icon_image(&mut self, colour_image: &Image, template_image: &Image)` - Set tray icon
-- `set_icon_tooltip(&mut self, tooltip: &str)` - Set tooltip text
-- `set_highlighted(&mut self, should_highlight: bool)` - Set highlight state
-- `show_info_bubble(&mut self, title: &str, content: &str)` - Show notification (limited support)
-- `hide_info_bubble(&mut self)` - Hide notification
-- `show_dropdown_menu(&mut self, menu: &PopupMenu)` - Display menu
+#[tokio::main]
+async fn main() {
+    // Channel for sending menu commands
+    let (ui_tx, ui_rx) = tokio::sync::mpsc::channel(32);
+    let mut tray = SystemTray::new(ui_rx).await;
+
+    while let Some(message) = tray.next().await {
+        match message {
+            NotifierItemMessage::Update { address, item, menu } => {
+                println!("Tray icon updated: {:?}", item);
+                
+                // Send a menu click command
+                ui_tx.send(NotifierItemCommand::MenuItemClicked {
+                    submenu_id: 0,
+                    menu_path: item.unwrap().menu.unwrap(),
+                    notifier_address: address,
+                }).await.unwrap();
+            }
+            NotifierItemMessage::Remove { address } => {
+                println!("Tray icon removed: {}", address);
+            }
+        }
+    }
+}
+```
+
+## How Stray Works
+
+Unlike traditional tray icon libraries that create icons, `stray` monitors existing system tray icons:
+
+1. **StatusNotifierWatcher**: Implements the freedesktop.org StatusNotifierWatcher specification
+2. **Event Streaming**: Provides a stream of tray icon updates and removals
+3. **Menu Interaction**: Allows sending menu activation commands to tray icons
+4. **DBus Integration**: Uses DBus for communication with the desktop environment
+
+## Examples
+
+The project includes several examples:
+
+### Basic Stray Example
+```bash
+# Monitor all system tray icons
+cargo run --example stray_example
+```
+
+### Interactive Example
+```bash
+# Interactive menu to send commands to tray icons
+cargo run --example stray_interactive
+```
+
+### Aloe API Compatibility
+```bash
+# Use the aloe-system-tray compatible API
+cargo run --example aloe_api_example
+```
 
 ## Configuration
 
@@ -110,60 +121,40 @@ The application uses a TOML configuration file located at:
 Example configuration:
 
 ```toml
-app_name = "My App"
-tooltip = "Click for menu"
+app_name = "My Tray Monitor"
+tooltip = "System Tray Monitor"
 icon_path = "assets/icons/app.png"
-dark_icon_path = "assets/icons/app_dark.png"
 start_minimized = true
-auto_start = false
 
 [menu_config]
 show_about = true
 show_settings = true
 show_quit = true
-
-[[menu_config.custom_items]]
-label = "Open Dashboard"
-action = "open_dashboard"
-enabled = true
-separator_after = false
 ```
 
-## Architecture
+## Project Structure
 
-The project is organized into the following modules:
-
-- **`aloe_compat`**: aloe-system-tray API compatibility layer
-- **`config`**: Configuration management and serialization
-- **`error`**: Custom error types and error handling
-- **`tray`**: Core system tray functionality
-- **`menu`**: Menu building and event handling
-
-## Implementation Details
-
-Since the original aloe-system-tray crate has build issues on Linux, this project:
-
-1. Provides a compatibility module (`aloe_compat`) that implements the aloe API
-2. Uses `tray-icon` crate underneath for actual system tray functionality
-3. Translates between aloe API calls and tray-icon implementations
-4. Maintains API compatibility for easy migration when aloe-system-tray is fixed
-
-## Examples
-
-See the `examples/` directory:
-
-- `aloe_api_example.rs`: Using the aloe-system-tray compatible API
-- `basic_tray.rs`: Direct API usage example
-
-Run examples:
-
-```bash
-# Run aloe API example
-cargo run --example aloe_api_example
-
-# Run basic example
-cargo run --example basic_tray
 ```
+src/
+├── stray_impl/     # Stray crate implementation
+├── aloe_compat/    # aloe-system-tray API compatibility
+├── config/         # Configuration management
+├── error/          # Error types
+├── menu/           # Menu structures
+└── tray/           # Legacy tray implementations
+
+examples/
+├── stray_example.rs       # Basic stray usage
+├── stray_interactive.rs   # Interactive menu commands
+└── aloe_api_example.rs    # Aloe-compatible API
+```
+
+## Key Differences from Traditional Tray Libraries
+
+1. **Monitor vs Create**: Stray monitors existing tray icons rather than creating new ones
+2. **System-wide View**: Can see and interact with all system tray icons
+3. **Event-driven**: React to tray icon changes rather than managing your own icon
+4. **Menu Interaction**: Send click commands to any tray icon's menu
 
 ## Development
 
@@ -175,6 +166,9 @@ cargo build
 
 # Release build
 cargo build --release
+
+# Check for errors
+cargo check
 ```
 
 ### Testing
@@ -187,26 +181,59 @@ cargo test
 RUST_LOG=debug cargo test
 ```
 
+### Logging
+
+Set the `RUST_LOG` environment variable:
+
+```bash
+# Show all logs
+RUST_LOG=debug cargo run
+
+# Show only info and above
+RUST_LOG=info cargo run
+
+# Show stray crate logs
+RUST_LOG=stray=debug cargo run
+```
+
 ## Troubleshooting
 
-If you encounter build errors related to aloe crates:
-- This project already includes the necessary workarounds
-- Check that you're using the compatibility layer (`aloe_compat` module)
-- See [ALOE_IMPLEMENTATION_GUIDE.md](ALOE_IMPLEMENTATION_GUIDE.md) for technical details
+### No tray icons detected
+- Ensure you have applications with tray icons running
+- Check that your desktop environment supports StatusNotifierItem
+- Verify DBus is running: `systemctl status dbus`
+
+### Permission errors
+- Stray uses DBus, ensure your user has appropriate permissions
+- Check DBus configuration in `/etc/dbus-1/`
+
+### Desktop Environment Compatibility
+Stray works with desktop environments that support the StatusNotifierItem specification:
+- KDE Plasma ✓
+- GNOME (with extensions) ✓
+- XFCE ✓
+- Most modern Linux DEs ✓
+
+## Migration from tray-icon
+
+If migrating from `tray-icon` or similar libraries:
+1. Stray doesn't create icons - it monitors them
+2. Use stray for system-wide tray monitoring
+3. For creating your own tray icon, combine with other libraries
 
 ## License
 
-This project is licensed under the GPL-3.0 license, consistent with the aloe-system-tray licensing.
+This project is licensed under the GPL-3.0 license.
 
 ## Contributing
 
 Contributions are welcome! Areas of interest:
-- Improving aloe API compatibility
-- Adding missing aloe-system-tray features
-- Cross-platform support (Windows, macOS)
+- Enhanced menu interaction capabilities
+- Better cross-desktop compatibility
+- Additional examples and documentation
 
 ## Acknowledgments
 
-- Built to be compatible with [aloe-system-tray](https://crates.io/crates/aloe-system-tray)
-- Uses [tray-icon](https://crates.io/crates/tray-icon) for Linux implementation
-- aloe-system-tray is a Rust translation of the JUCE C++ framework
+- Built with [stray](https://crates.io/crates/stray) - A minimal SystemNotifierWatcher implementation
+- Compatible with [aloe-system-tray](https://crates.io/crates/aloe-system-tray) API patterns
+- Implements [StatusNotifierItem](https://www.freedesktop.org/wiki/Specifications/StatusNotifierItem/) specification

@@ -10,13 +10,18 @@ keywords = ["system-tray", "tray", "linux", "cross-platform", "aloe"]
 categories = ["gui", "os"]
 
 [dependencies]
-# Working system tray implementation
-tray-icon = "0.21"
+# System tray implementation using stray - a modern Linux tray API
+stray = "0.1.3"
+tokio-stream = "0.1"
+
+# Image handling for icons
 image = "0.25"
+
+# GTK for UI elements (optional, for advanced features)
 gtk = "0.18"
 
 # NOTE: aloe-system-tray has build issues on Linux due to macOS dependencies
-# We implement a compatibility layer that matches its API
+# We implement a compatibility layer that matches its API using stray
 
 tokio = { version = "1.43", features = ["full"] }
 anyhow = "1.0"
